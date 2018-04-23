@@ -15,9 +15,10 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
 	
+	
 	<bean id="commonBean" class="com.zby.bean.CommonBean" init-method="init"
 		destroy-method="destroy">
 		<property name="userName" value="ZBY"></property>
 	</bean>
-	
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 </beans>
