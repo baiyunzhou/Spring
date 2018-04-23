@@ -25,3 +25,5 @@ target
 .project
 classes
 bin
+.settings
+.classpath
