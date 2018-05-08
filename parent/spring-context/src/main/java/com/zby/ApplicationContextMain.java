@@ -1,6 +1,7 @@
 package com.zby;
 
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -13,11 +14,12 @@ public class ApplicationContextMain {
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
 		CommonBean commonBean = (CommonBean) applicationContext.getBean("commonBean");
 		commonBean.sayHello();
+		System.out.println(commonBean.getBeanA());
 
 		// 前者只能反射出当前声明的方法，后者可以反射出包括父类的所有方法
 		System.out.println(Arrays.asList(applicationContext.getClass().getDeclaredMethods()));
 		System.out.println(Arrays.asList(applicationContext.getClass().getMethods()));
-
+		TimeUnit.HOURS.sleep(1);
 		applicationContext.getClass().getMethod("close").invoke(applicationContext);
 
 		// 使用ClassPathXmlApplicationContext直接调用close()方法

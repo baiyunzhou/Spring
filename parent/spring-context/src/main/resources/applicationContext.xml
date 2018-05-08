@@ -14,11 +14,13 @@
 		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-4.3.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
-	
-	
+
+	<context:component-scan base-package="com.zby.aop" ></context:component-scan>
 	<bean id="commonBean" class="com.zby.bean.CommonBean" init-method="init"
 		destroy-method="destroy">
 		<property name="userName" value="ZBY"></property>
 	</bean>
-	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	
+	<bean id="beanA" class="com.zby.bean.BeanA"></bean>
+	
 </beans>
