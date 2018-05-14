@@ -27,3 +27,4 @@ classes
 bin
 .settings
 .classpath
+.pom.xml.swp
