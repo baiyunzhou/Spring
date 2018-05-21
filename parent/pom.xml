@@ -149,5 +149,6 @@
 		<module>spring-web</module>
 		<module>spring-context-annotation</module>
 		<module>spring-context-annotation-conditional</module>
+		<module>spring-context-annotation-metadata</module>
 	</modules>
 </project>
