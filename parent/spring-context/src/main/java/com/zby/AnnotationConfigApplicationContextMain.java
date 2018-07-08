@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import com.zby.bean.CommonBean;
 
 @Configuration
-public class AnnotationApplicationContextMain {
+public class AnnotationConfigApplicationContextMain {
 	@Bean
 	public CommonBean commonBean() {
 		return new CommonBean("zby");
@@ -15,7 +15,7 @@ public class AnnotationApplicationContextMain {
 
 	public static void main(String[] args) {
 		AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(
-				AnnotationApplicationContextMain.class);
+				AnnotationConfigApplicationContextMain.class);
 		CommonBean commonBean = (CommonBean) applicationContext.getBean("commonBean");
 		commonBean.sayHello();
 		applicationContext.close();
