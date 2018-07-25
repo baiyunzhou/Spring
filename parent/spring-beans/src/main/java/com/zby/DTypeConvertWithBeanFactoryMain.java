@@ -35,6 +35,7 @@ public class DTypeConvertWithBeanFactoryMain {
 		beanFactory.registerCustomEditor(Date.class, MyCustomDateEditor.class);
 		InnerDateBean innerDateBean = (InnerDateBean) beanFactory.getBean("innerDateBean");
 		System.out.println(innerDateBean);
+		// 当然，如果注入的是时间的话，还有个无聊的办法就是使用工厂Bean，但是只能一次使用，配置也麻烦
 	}
 
 	private static class MyCustomDateEditor extends CustomDateEditor {

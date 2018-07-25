@@ -12,7 +12,6 @@ import com.zby.condition.Prod;
 import com.zby.condition.Qa;
 
 @Configuration
-
 public class AnnotationApplicationContextMain {
 	@Bean
 	@Dev
