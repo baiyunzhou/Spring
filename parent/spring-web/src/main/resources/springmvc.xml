@@ -5,7 +5,46 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
-	<mvc:annotation-driven></mvc:annotation-driven>
+	
+	<mvc:annotation-driven content-negotiation-manager="mvcContentNegotiationManager" enable-matrix-variables="true" 
+		conversion-service="formattingConversionService" validator="optionalValidator" message-codes-resolver="myMessageCodesResolver" 
+		ignore-default-model-on-redirect="true" >
+		<!-- <mvc:path-matching /> -->
+		<mvc:message-converters register-defaults="true">
+			<bean class=""></bean>
+		</mvc:message-converters>
+		<mvc:argument-resolvers></mvc:argument-resolvers>
+	</mvc:annotation-driven>
+		
+		
+	<!-- 配置内容导航管理器 -->
+	<bean id="mvcContentNegotiationManager"
+		class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+		<property name="mediaTypes">
+			<props>
+				<prop key="xml">application/xml</prop>
+				<prop key="json">application/json</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<mvc:cors>
+		<mvc:mapping path="/**" allow-credentials="true" allowed-headers="*" allowed-methods="GET,POST,HEAD" allowed-origins="*" max-age="1800"/>
+	</mvc:cors> 
+	
+	<bean id="formattingConversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean"></bean>
+	
+	<!-- 导入了validation-api包会注册这个实例，但是可能是没有实现的 -->
+	<bean id="optionalValidator" class="org.springframework.validation.beanvalidation.OptionalValidatorFactoryBean"></bean>
+	
+	<bean id="myMessageCodesResolver" class="com.zby.config.MyMessageCodesResolver"></bean>
+	
+	
+	
+	
+	
+	
+	
 	<!-- 配置包扫描器 -->
 	<context:component-scan base-package="com.zby.controller"></context:component-scan>
 	<!-- 配置注解驱动 -->
@@ -13,5 +52,11 @@
 		<bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"> 
 		<property name="supportedMediaTypes"> <list> <value>text/html;charset=UTF-8</value> 
 		</list> </property> </bean> </mvc:message-converters> </mvc:annotation-driven> -->
-	<mvc:default-servlet-handler/>
+	<mvc:default-servlet-handler />
+	<mvc:view-resolvers>
+		<mvc:freemarker prefix="" suffix="" />
+	</mvc:view-resolvers>
+	<mvc:cors>
+		<mvc:mapping path="/user" />
+	</mvc:cors>
 </beans>

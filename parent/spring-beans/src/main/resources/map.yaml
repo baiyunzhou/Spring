@@ -1,7 +1,10 @@
 person:
   level3:
     level4:
-      level5:hello
+      level5:
+        hello
 language:
-  java:good
-  python:good
+  java:
+    good
+  python:
+    good

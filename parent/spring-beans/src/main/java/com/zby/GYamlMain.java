@@ -21,7 +21,7 @@ public class GYamlMain {
 		Map<?, ?> map = (Map<?, ?>) beanFactory.getBean("yamlMap");
 		System.out.println(map);
 		Properties prop = (Properties) beanFactory.getBean("yamlProperties");
-		System.out.println(prop);
+		System.out.println(prop.keySet());
 	}
 
 }

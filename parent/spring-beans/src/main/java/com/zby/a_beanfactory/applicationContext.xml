@@ -8,7 +8,7 @@
 	default-autowire-candidates="" default-init-method=""
 	default-destroy-method="" profile="">
 
-	<bean id="commonBean" class="com.zby.bean.CommonBean" init-method="init"
+	<bean id="commonBean" class="com.zby.a_beanfactory.CommonBean" init-method="init"
 		destroy-method="destroy">
 		<property name="userName" value="ZBY"></property>
 	</bean>
