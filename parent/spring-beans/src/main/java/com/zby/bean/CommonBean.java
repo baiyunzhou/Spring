@@ -1,5 +1,8 @@
 package com.zby.bean;
 
+import lombok.Builder;
+
+@Builder
 public class CommonBean {
 	private String userName;
 
