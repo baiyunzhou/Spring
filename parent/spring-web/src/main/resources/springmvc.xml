@@ -6,13 +6,16 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	
+	<context:component-scan base-package="com.zby.mvc"></context:component-scan>
+	
 	<mvc:annotation-driven content-negotiation-manager="mvcContentNegotiationManager" enable-matrix-variables="true" 
-		conversion-service="formattingConversionService" validator="optionalValidator" message-codes-resolver="myMessageCodesResolver" 
+		conversion-service="formattingConversionService" message-codes-resolver="myMessageCodesResolver" 
 		ignore-default-model-on-redirect="true" >
 		<!-- <mvc:path-matching /> -->
-		<mvc:message-converters register-defaults="true">
+		<!-- <mvc:message-converters register-defaults="true">
 			<bean class=""></bean>
-		</mvc:message-converters>
+		</mvc:message-converters> -->
+		<mvc:path-matching suffix-pattern="false" registered-suffixes-only="true"  trailing-slash="false"/>
 		<mvc:argument-resolvers></mvc:argument-resolvers>
 	</mvc:annotation-driven>
 		
@@ -29,13 +32,14 @@
 	</bean>
 	
 	<mvc:cors>
+		<mvc:mapping path="/**"/>
 		<mvc:mapping path="/**" allow-credentials="true" allowed-headers="*" allowed-methods="GET,POST,HEAD" allowed-origins="*" max-age="1800"/>
 	</mvc:cors> 
 	
 	<bean id="formattingConversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean"></bean>
 	
 	<!-- 导入了validation-api包会注册这个实例，但是可能是没有实现的 -->
-	<bean id="optionalValidator" class="org.springframework.validation.beanvalidation.OptionalValidatorFactoryBean"></bean>
+	<!-- <bean id="optionalValidator" class="org.springframework.validation.beanvalidation.OptionalValidatorFactoryBean"></bean> -->
 	
 	<bean id="myMessageCodesResolver" class="com.zby.config.MyMessageCodesResolver"></bean>
 	
@@ -53,9 +57,6 @@
 		<property name="supportedMediaTypes"> <list> <value>text/html;charset=UTF-8</value> 
 		</list> </property> </bean> </mvc:message-converters> </mvc:annotation-driven> -->
 	<mvc:default-servlet-handler />
-	<mvc:view-resolvers>
-		<mvc:freemarker prefix="" suffix="" />
-	</mvc:view-resolvers>
 	<mvc:cors>
 		<mvc:mapping path="/user" />
 	</mvc:cors>

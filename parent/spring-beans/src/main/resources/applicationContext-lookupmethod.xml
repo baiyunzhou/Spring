@@ -5,7 +5,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
 	
-	<bean id="teacher" class="com.zby.lookupmethod.Teacher"></bean>
+	<bean id="teacher" class="com.zby.lookupmethod.Teacher" ></bean>
 	
 	<bean id="getBeanDemo" class="com.zby.lookupmethod.GetBeanDemo">
 		<lookup-method bean="teacher" name="getBean"/>

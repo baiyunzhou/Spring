@@ -3,6 +3,15 @@ package com.zby.a_beanfactory;
 public class CommonBean {
 	private String userName;
 
+	public CommonBean() {
+		super();
+	}
+
+	public CommonBean(String userName) {
+		super();
+		this.userName = userName;
+	}
+
 	public String getUserName() {
 		return userName;
 	}

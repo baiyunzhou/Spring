@@ -9,8 +9,8 @@
 	default-destroy-method="" profile="">
 
 	<bean id="commonBean" class="com.zby.a_beanfactory.CommonBean" init-method="init"
-		destroy-method="destroy">
-		<property name="userName" value="ZBY"></property>
+		destroy-method="destroy" >
+		<constructor-arg index="0" value="ZBY"></constructor-arg>
 	</bean>
 
 </beans>
