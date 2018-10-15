@@ -13,5 +13,4 @@ public class XmlBeanFactoryMain {
 		commonBean.sayHello();
 		beanFactory.containsBean("commonBean");
 	}
-
 }

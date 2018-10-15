@@ -1,13 +1,16 @@
 package com.zby;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScans;
 import org.springframework.context.annotation.Conditional;
@@ -47,6 +50,8 @@ import com.zby.condition.CustomConfigurationCondition;
 public class AnnotationApplicationContextMain {
 	@Resource(name = "systemProperties")
 	private Map<String, String> systemProperties;
+	@Autowired
+	private List<MyBean> list;
 
 	public static void main(String[] args) {
 
@@ -60,7 +65,22 @@ public class AnnotationApplicationContextMain {
 		AnnotationApplicationContextMain annotationApplicationContextMain = applicationContext
 				.getBean(AnnotationApplicationContextMain.class);
 		System.out.println("systemProperties:---------" + annotationApplicationContextMain.systemProperties);
+		System.out.println("list" + annotationApplicationContextMain.list);
 		applicationContext.close();
+	}
+
+	@Bean
+	public MyBean myBean() {
+		return new MyBean();
+	}
+
+	@Bean
+	public MyBean myBean2() {
+		return new MyBean();
+	}
+
+	private static class MyBean {
+
 	}
 }
 // AnnotationConfigApplicationContext初始化同属初始化下面两个组件
