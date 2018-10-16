@@ -9,6 +9,6 @@
 	</bean>
 	<bean id="yamlProperties"
 		class="org.springframework.beans.factory.config.YamlPropertiesFactoryBean">
-		<property name="resources" value="map.yaml"></property>
+		<property name="resources" value="map.yaml" ></property>
 	</bean>
 </beans>
