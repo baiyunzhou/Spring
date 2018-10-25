@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="managedBean" class="com.zby.managed.ManagedBean" c:_1="string">
+		<constructor-arg index="0" >
+			<array>
+				<value>array3</value>
+				<value>array4</value>
+			</array>
+		</constructor-arg>
+ 		<property name="strArray">
+			<array>
+				<value>array5</value>
+				<value>array6</value>
+			</array>
+		</property>
+		<property name="strList">
+			<list>
+				<value>list1</value>
+				<value>list2</value>
+			</list>
+		</property>
+		<property name="strSet">
+			<set>
+				<value>set1</value>
+				<value>set2</value>
+			</set>
+		</property>
+		<property name="strMap">
+			<map>
+				<entry key="key1" value="value1"></entry>
+				<entry key="key2" value="value2"></entry>
+			</map>
+		</property>
+		<property name="properties">
+			<props>
+				<prop key="prop1">propV1</prop>
+				<prop key="prop2">propV2</prop>
+			</props>
+		</property>
+		<!-- <qualifier type="org.springframework.beans.factory.annotation.Qualifier"></qualifier> -->
+	</bean>
+</beans>

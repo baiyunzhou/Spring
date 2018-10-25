@@ -8,7 +8,7 @@ import org.springframework.core.io.ClassPathResource;
 public class ApplicationMain {
 
 	public static void main(String[] args) {
-		BeanFactory beanFactory = new XmlBeanFactory(new ClassPathResource("applicationContext.xml"));
+		BeanFactory beanFactory = new XmlBeanFactory(new ClassPathResource("com/zby/managed/applicationContext.xml"));
 		ManagedBean managedBean = beanFactory.getBean(ManagedBean.class);
 		System.out.println(managedBean);
 	}

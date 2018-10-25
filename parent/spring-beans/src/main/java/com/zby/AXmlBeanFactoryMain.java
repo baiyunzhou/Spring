@@ -4,7 +4,7 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
 
-import com.zby.bean.CommonBean;
+import com.zby.autowire.BeanA;
 
 /**
  * 
@@ -17,8 +17,8 @@ public class AXmlBeanFactoryMain {
 
 	public static void main(String[] args) {
 		BeanFactory beanFactory = new XmlBeanFactory(new ClassPathResource("applicationContext.xml"));
-		CommonBean commonBean = (CommonBean) beanFactory.getBean("commonBean");
-		commonBean.sayHello();
+		BeanA beanA = (BeanA) beanFactory.getBean("beanA");
+		System.out.println(beanA);
 	}
 
 }
