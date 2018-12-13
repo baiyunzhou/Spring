@@ -20,8 +20,8 @@ import org.xml.sax.InputSource;
 /**
  * 
  * @author zby
- * @date 2018Äê4ÔÂ21ÈÕ
- * @description spring¶ÁÈ¡XML²¢×ª»»ÎªDocument¹ý³Ì
+ * @date 2018ï¿½ï¿½4ï¿½ï¿½21ï¿½ï¿½
+ * @description springï¿½ï¿½È¡XMLï¿½ï¿½×ªï¿½ï¿½ÎªDocumentï¿½ï¿½ï¿½ï¿½
  */
 public class CDocumentMain {
 
@@ -29,27 +29,26 @@ public class CDocumentMain {
 		// everytime use method resource.getInputSteam(),it return a new inputstream
 		Resource resource = new ClassPathResource("applicationContext.xml");
 		InputStream inputStream = resource.getInputStream();
-		// ¡¾org.xml.sax.InputSource¡¿
+		// ï¿½ï¿½org.xml.sax.InputSourceï¿½ï¿½
 		InputSource inputSource = new InputSource(inputStream);
 
 		DocumentLoader documentLoader = new DefaultDocumentLoader();
 
-		// ¡¾org.xml.sax.EntityResolver¡¿
+		// ï¿½ï¿½org.xml.sax.EntityResolverï¿½ï¿½
 		EntityResolver entityResolver = new ResourceEntityResolver(new DefaultResourceLoader());
 		Log logger = LogFactory.getLog(CDocumentMain.class);
-		// ¡¾org.xml.sax.ErrorHandler¡¿
+		// ï¿½ï¿½org.xml.sax.ErrorHandlerï¿½ï¿½
 		ErrorHandler errorHandler = new SimpleSaxErrorHandler(logger);
 
 		XmlValidationModeDetector validationModeDetector = new XmlValidationModeDetector();
-		// warn,detector will close the inputStream£¬so must give it a new one
+		// warn,detector will close the inputStreamï¿½ï¿½so must give it a new one
 		int validationMode = validationModeDetector.detectValidationMode(resource.getInputStream());
 		if (validationMode != XmlValidationModeDetector.VALIDATION_AUTO) {
 			validationMode = XmlValidationModeDetector.VALIDATION_XSD;
 		}
 		boolean namespaceAware = false;
 
-		Document document = documentLoader.loadDocument(inputSource, entityResolver, errorHandler, validationMode,
-				namespaceAware);
+		Document document = documentLoader.loadDocument(inputSource, entityResolver, errorHandler, validationMode, namespaceAware);
 		System.out.println(document);
 	}
 

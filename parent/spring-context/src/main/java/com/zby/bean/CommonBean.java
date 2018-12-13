@@ -1,6 +1,8 @@
 package com.zby.bean;
 
-public class CommonBean {
+import org.springframework.context.Lifecycle;
+
+public class CommonBean implements Lifecycle {
 	private String userName;
 	// @Autowired
 	private BeanA beanA;
@@ -41,4 +43,22 @@ public class CommonBean {
 	public void destroy() {
 		System.out.println("destroy");
 	}
+
+	@Override
+	public void start() {
+		System.out.println("启动");
+
+	}
+
+	@Override
+	public void stop() {
+		System.out.println("停止");
+
+	}
+
+	@Override
+	public boolean isRunning() {
+		return false;
+	}
+
 }
