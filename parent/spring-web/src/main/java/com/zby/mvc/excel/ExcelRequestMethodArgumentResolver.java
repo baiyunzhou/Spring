@@ -20,6 +20,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
@@ -29,9 +30,20 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.util.WebUtils;
 
+import com.alibaba.fastjson.JSON;
+
 public class ExcelRequestMethodArgumentResolver implements HandlerMethodArgumentResolver {
 
 	private ConcurrentMap<Class<?>, Map<Field, Header>> cache = new ConcurrentHashMap<>(64);
+	private final ConfigurableBeanFactory configurableBeanFactory;
+
+	public ExcelRequestMethodArgumentResolver() {
+		this.configurableBeanFactory = null;
+	}
+
+	public ExcelRequestMethodArgumentResolver(ConfigurableBeanFactory beanFactory) {
+		this.configurableBeanFactory = beanFactory;
+	}
 
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
@@ -76,6 +88,7 @@ public class ExcelRequestMethodArgumentResolver implements HandlerMethodArgument
 		int rowNum = sheet.getPhysicalNumberOfRows();
 		int lastRowNum = sheet.getLastRowNum();
 		List<Object> data = new ArrayList<>();
+		List<Map<String, String>> mapData = new ArrayList<>();
 		if (rowNum < 2) {
 			return data;
 		}
@@ -90,18 +103,22 @@ public class ExcelRequestMethodArgumentResolver implements HandlerMethodArgument
 			Object obj = voClazz.newInstance();
 			data.add(obj);
 			Set<Field> keySet = clazzMap.keySet();
+			Map<String, String> map = new HashMap<>();
 			for (Field field : keySet) {
 				Header header = clazzMap.get(field);
 				if (null != header) {
 					Cell cell = row.getCell(header.index());
 					String cellStringData = getCellStringData(cell);
-					field.setAccessible(true);
-					field.set(obj, cellStringData);
+					String name = field.getName();
+					map.put(name, cellStringData);
 				}
-
 			}
+			mapData.add(map);
+
 		}
-		return data;
+		String jsonData = JSON.toJSONString(mapData);
+		List<?> listData = JSON.parseArray(jsonData, voClazz);
+		return listData;
 	}
 
 	private String getCellStringData(Cell cell) {
@@ -144,7 +161,6 @@ public class ExcelRequestMethodArgumentResolver implements HandlerMethodArgument
 					cache.put(voClazz, clazzMap);
 				}
 			}
-
 		}
 		return clazzMap;
 	}

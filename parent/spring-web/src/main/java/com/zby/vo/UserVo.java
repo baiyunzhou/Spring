@@ -1,20 +1,24 @@
 package com.zby.vo;
 
+import java.util.Date;
+
+import com.alibaba.fastjson.annotation.JSONField;
 import com.zby.mvc.excel.Header;
 
 public class UserVo {
 	@Header(index = 0)
-	private String id;
+	private Long id;
 	@Header(index = 1)
 	private String name;
 	@Header(index = 2)
-	private String birthday;
+	@JSONField(format = "yyyy-HH-dd")
+	private Date birthday;
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -26,11 +30,11 @@ public class UserVo {
 		this.name = name;
 	}
 
-	public String getBirthday() {
+	public Date getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(String birthday) {
+	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
 
